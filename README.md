@@ -1,10 +1,9 @@
 # asp.net-mvc-webapi-winform
 
-NOTA: para los proyectos MvcEmpleados, webservice1 se debe agregar los parametros de user y admin en el ``Web.config`
+NOTA: para los proyectos MvcEmpleados, webservice1 se debe agregar los parametros de user y admin en el `Web.config`
 
-```
-metadata=res://*/EntregandoSasModel.csdl|res://*/EntregandoSasModel.ssdl|res://*/EntregandoSasModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=ENTREGANDO_SAS;user id=admin;password=;MultipleActiveResultSets=True;App=EntityFramework&quot;"
-```
+> metadata=res://*/EntregandoSasModel.csdl|res://*/EntregandoSasModel.ssdl|res://*/EntregandoSasModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=localhost;initial catalog=ENTREGANDO_SAS;user id=admin;password=;MultipleActiveResultSets=True;App=EntityFramework&quot;"
+
 
 # Base de datos
 
