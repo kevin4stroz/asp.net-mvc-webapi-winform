@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ENTREGANDO_SASModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="ID_EMP" />
+          </Key>
+          <Property Name="ID_EMP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CEDULA" Type="bigint" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SEXO" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="F_NACIMIENTO" Type="date" />
+          <Property Name="F_REGISTRO" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VEHICULOS">
+          <Key>
+            <PropertyRef Name="ID_VEHICULO" />
+          </Key>
+          <Property Name="ID_VEHICULO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PLACA" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="MODELO" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VIAJES">
+          <Key>
+            <PropertyRef Name="ID_VIAJE" />
+          </Key>
+          <Property Name="ID_VIAJE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ORIGEN" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DESTINO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="T_TRANSCURRIDO_H" Type="time" Precision="7" Nullable="false" />
+          <Property Name="NOM_PASAJERO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_VEHICULO" Type="int" Nullable="false" />
+          <Property Name="ID_EMP" Type="int" Nullable="false" />
+          <Property Name="HORA_VIAJE" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_EMPLEADO">
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADOS">
+              <PropertyRef Name="ID_EMP" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="ID_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VEHICULO">
+          <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VEHICULOS">
+              <PropertyRef Name="ID_VEHICULO" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="ID_VEHICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ENTREGANDO_SASModelStoreContainer">
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VEHICULOS" EntityType="Self.VEHICULOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VIAJES" EntityType="Self.VIAJES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_EMPLEADO" Association="Self.FK_EMPLEADO">
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VEHICULO" Association="Self.FK_VEHICULO">
+            <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ENTREGANDO_SASModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="EMPLEADOS">
+          <Key>
+            <PropertyRef Name="ID_EMP" />
+          </Key>
+          <Property Name="ID_EMP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CEDULA" Type="Int64" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SEXO" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="F_NACIMIENTO" Type="DateTime" Precision="0" />
+          <Property Name="F_REGISTRO" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="VIAJES" Relationship="ENTREGANDO_SASModel.FK_EMPLEADO" FromRole="EMPLEADOS" ToRole="VIAJES" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        </EntityType>
+        <EntityType Name="VEHICULOS">
+          <Key>
+            <PropertyRef Name="ID_VEHICULO" />
+          </Key>
+          <Property Name="ID_VEHICULO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PLACA" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MODELO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VIAJES" Relationship="ENTREGANDO_SASModel.FK_VEHICULO" FromRole="VEHICULOS" ToRole="VIAJES" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        </EntityType>
+        <EntityType Name="VIAJES">
+          <Key>
+            <PropertyRef Name="ID_VIAJE" />
+          </Key>
+          <Property Name="ID_VIAJE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ORIGEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESTINO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="T_TRANSCURRIDO_H" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="NOM_PASAJERO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_VEHICULO" Type="Int32" Nullable="false" />
+          <Property Name="ID_EMP" Type="Int32" Nullable="false" />
+          <Property Name="HORA_VIAJE" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="EMPLEADOS" Relationship="Self.FK_EMPLEADO" FromRole="VIAJES" ToRole="EMPLEADOS" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+          <NavigationProperty Name="VEHICULOS" Relationship="Self.FK_VEHICULO" FromRole="VIAJES" ToRole="VEHICULOS" a:GetterAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration" />
+        </EntityType>
+        <Association Name="FK_EMPLEADO">
+          <End Role="EMPLEADOS" Type="Self.EMPLEADOS" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLEADOS">
+              <PropertyRef Name="ID_EMP" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="ID_EMP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_VEHICULO">
+          <End Role="VEHICULOS" Type="Self.VEHICULOS" Multiplicity="1" />
+          <End Role="VIAJES" Type="Self.VIAJES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VEHICULOS">
+              <PropertyRef Name="ID_VEHICULO" />
+            </Principal>
+            <Dependent Role="VIAJES">
+              <PropertyRef Name="ID_VEHICULO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ENTREGANDO_SASEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="EMPLEADOS" EntityType="Self.EMPLEADOS" />
+          <EntitySet Name="VEHICULOS" EntityType="Self.VEHICULOS" />
+          <EntitySet Name="VIAJES" EntityType="Self.VIAJES" />
+          <AssociationSet Name="FK_EMPLEADO" Association="Self.FK_EMPLEADO">
+            <End Role="EMPLEADOS" EntitySet="EMPLEADOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_VEHICULO" Association="Self.FK_VEHICULO">
+            <End Role="VEHICULOS" EntitySet="VEHICULOS" />
+            <End Role="VIAJES" EntitySet="VIAJES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ENTREGANDO_SASModelStoreContainer" CdmEntityContainer="ENTREGANDO_SASEntities">
+          <EntitySetMapping Name="EMPLEADOS">
+            <EntityTypeMapping TypeName="ENTREGANDO_SASModel.EMPLEADOS">
+              <MappingFragment StoreEntitySet="EMPLEADOS">
+                <ScalarProperty Name="ID_EMP" ColumnName="ID_EMP" />
+                <ScalarProperty Name="CEDULA" ColumnName="CEDULA" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="SEXO" ColumnName="SEXO" />
+                <ScalarProperty Name="F_NACIMIENTO" ColumnName="F_NACIMIENTO" />
+                <ScalarProperty Name="F_REGISTRO" ColumnName="F_REGISTRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VEHICULOS">
+            <EntityTypeMapping TypeName="ENTREGANDO_SASModel.VEHICULOS">
+              <MappingFragment StoreEntitySet="VEHICULOS">
+                <ScalarProperty Name="ID_VEHICULO" ColumnName="ID_VEHICULO" />
+                <ScalarProperty Name="PLACA" ColumnName="PLACA" />
+                <ScalarProperty Name="MODELO" ColumnName="MODELO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VIAJES">
+            <EntityTypeMapping TypeName="ENTREGANDO_SASModel.VIAJES">
+              <MappingFragment StoreEntitySet="VIAJES">
+                <ScalarProperty Name="ID_VIAJE" ColumnName="ID_VIAJE" />
+                <ScalarProperty Name="ORIGEN" ColumnName="ORIGEN" />
+                <ScalarProperty Name="DESTINO" ColumnName="DESTINO" />
+                <ScalarProperty Name="T_TRANSCURRIDO_H" ColumnName="T_TRANSCURRIDO_H" />
+                <ScalarProperty Name="NOM_PASAJERO" ColumnName="NOM_PASAJERO" />
+                <ScalarProperty Name="ID_VEHICULO" ColumnName="ID_VEHICULO" />
+                <ScalarProperty Name="ID_EMP" ColumnName="ID_EMP" />
+                <ScalarProperty Name="HORA_VIAJE" ColumnName="HORA_VIAJE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

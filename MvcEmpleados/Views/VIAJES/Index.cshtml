@@ -1,0 +1,70 @@
+﻿@model IEnumerable<MvcEmpleados.VIAJES>
+
+@{
+    ViewBag.Title = "Viajes CRUD";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ORIGEN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESTINO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.T_TRANSCURRIDO_H)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NOM_PASAJERO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HORA_VIAJE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EMPLEADOS.NOMBRE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VEHICULOS.PLACA)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ORIGEN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESTINO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.T_TRANSCURRIDO_H)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NOM_PASAJERO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HORA_VIAJE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EMPLEADOS.NOMBRE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VEHICULOS.PLACA)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_VIAJE }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_VIAJE }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_VIAJE })
+        </td>
+    </tr>
+}
+
+</table>

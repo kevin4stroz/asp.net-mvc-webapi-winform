@@ -1,0 +1,18 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Entregando SAS - CRUD</h1>
+    <p class="lead">
+        Esta aplicacion escrita en ASP.net usando el estilo de arquitectura de diseño MVC (Modelo Vista Controlador)
+        tiene como objetivo crear un CRUD administrable donde se pueda lista/modificar/insertar/borrar registros de
+        cada una de la tablas utilizadas en esta aplicacion. Esta aplicacion maneja tres tablas principales
+    </p>
+    <div class="botonera">
+        @Html.ActionLink("Empleados", "Index", "EMPLEADOS", null, new { @class = "btn btn-success btn-lg boton" })
+        @Html.ActionLink("Vehiculos", "Index", "VEHICULOS", null, new { @class = "btn btn-success btn-lg boton" })
+        @Html.ActionLink("Viajes", "Index", "VIAJES", null, new { @class = "btn btn-success btn-lg boton" })
+    </div>
+    
+</div>

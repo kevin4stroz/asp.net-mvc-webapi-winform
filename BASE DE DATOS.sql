@@ -1,0 +1,138 @@
+-- CREACION DE LA BASE DE DATOS
+create database [ENTREGANDO_SAS];
+
+-- CREACION DE LA TABLA EMPLEADOS
+create table EMPLEADOS(
+	ID_EMP int primary key IDENTITY(1,1),
+	CEDULA bigint not null,
+	NOMBRE varchar(50) not null,
+	APELLIDO varchar(50) not null,
+	SEXO char not null,
+	F_NACIMIENTO date null,
+	F_REGISTRO datetime not null
+);
+
+-- CREACION DE LA TABLA VEHICULOS
+create table VEHICULOS(
+	ID_VEHICULO int primary key IDENTITY(1,1),
+	PLACA varchar(7) not null,
+	MODELO varchar(50) not null
+);
+
+-- CREACION DE LA TABLA VIAJES
+create table VIAJES(
+	ID_VIAJE int primary key IDENTITY(1,1),
+	ORIGEN varchar(50) not null,
+	DESTINO varchar(50) not null,
+	T_TRANSCURRIDO_H time not null,
+	NOM_PASAJERO varchar(50) not null,
+	
+	-- LLAVE FORANEA DE VEHICULO
+	ID_VEHICULO integer not null,
+	CONSTRAINT FK_VEHICULO FOREIGN KEY (ID_VEHICULO)
+    REFERENCES VEHICULOS(ID_VEHICULO),
+
+	-- LLAVE FORANEA DE EMPLEADOS
+	ID_EMP integer not null,
+	CONSTRAINT FK_EMPLEADO FOREIGN KEY (ID_EMP)
+    REFERENCES EMPLEADOS(ID_EMP),
+
+	HORA_VIAJE datetime not null
+);
+
+-- registros iniciales de empleados
+INSERT INTO [dbo].[EMPLEADOS]
+([CEDULA],[NOMBRE],[APELLIDO],[SEXO],[F_NACIMIENTO],[F_REGISTRO])
+VALUES
+(1090472511,'Pedro andres','Duque Gutierrez','M','1994-02-01',CURRENT_TIMESTAMP);
+
+INSERT INTO [dbo].[EMPLEADOS]
+([CEDULA],[NOMBRE],[APELLIDO],[SEXO],[F_NACIMIENTO],[F_REGISTRO])
+VALUES
+(1090472522,'Pepegrillo','Montañez','M','1994-03-01',CURRENT_TIMESTAMP);
+
+INSERT INTO [dbo].[EMPLEADOS]
+([CEDULA],[NOMBRE],[APELLIDO],[SEXO],[F_NACIMIENTO],[F_REGISTRO])
+VALUES
+(1090472533,'David','Fuerte Roble','M','1994-04-01',CURRENT_TIMESTAMP);
+
+INSERT INTO [dbo].[EMPLEADOS]
+([CEDULA],[NOMBRE],[APELLIDO],[SEXO],[F_NACIMIENTO],[F_REGISTRO])
+VALUES
+(1090472544,'Kevin','Astroz','M','1994-05-01',CURRENT_TIMESTAMP);
+
+
+-- registros iniciales de vehiculos
+INSERT INTO [dbo].[VEHICULOS]
+([PLACA], [MODELO])
+VALUES
+('AAA-111', 'FORD');
+
+INSERT INTO [dbo].[VEHICULOS]
+([PLACA], [MODELO])
+VALUES
+('BBB-222', 'MERCEDES');
+
+INSERT INTO [dbo].[VEHICULOS]
+([PLACA], [MODELO])
+VALUES
+('CCC-333', 'RENAULT');
+
+-- registros de viajes
+INSERT INTO [dbo].[VIAJES]
+([ORIGEN],[DESTINO],[T_TRANSCURRIDO_H],[NOM_PASAJERO],[ID_VEHICULO],[ID_EMP],[HORA_VIAJE])
+VALUES
+('CHAPINERO','TEUSAQUILLO', '1:30', 'Pasajero 1', 1, 1, CURRENT_TIMESTAMP);
+
+INSERT INTO [dbo].[VIAJES]
+([ORIGEN],[DESTINO],[T_TRANSCURRIDO_H],[NOM_PASAJERO],[ID_VEHICULO],[ID_EMP],[HORA_VIAJE])
+VALUES
+('TUNAL','PORTAL 80', '2:30', 'Pasajero 2', 2, 2, CURRENT_TIMESTAMP);
+
+INSERT INTO [dbo].[VIAJES]
+([ORIGEN],[DESTINO],[T_TRANSCURRIDO_H],[NOM_PASAJERO],[ID_VEHICULO],[ID_EMP],[HORA_VIAJE])
+VALUES
+('USME','BOSA', '3:30', 'Pasajero 3', 3, 3, CURRENT_TIMESTAMP);
+
+
+-- procedimiento almacenado para obtener los viajes de un empleado
+CREATE PROCEDURE PaddViajesEmpleado
+@ORIGEN varchar(50),
+	@DESTINO varchar(50),
+	@T_TRANSCURRIDO_H time,
+	@NOM_PASAJERO varchar(50),
+	@ID_VEHICULO integer,
+	@ID_EMP integer
+AS
+	INSERT INTO [dbo].[VIAJES]
+		([ORIGEN],[DESTINO],[T_TRANSCURRIDO_H],[NOM_PASAJERO],[ID_VEHICULO],[ID_EMP],[HORA_VIAJE])
+	VALUES
+		(@ORIGEN, @DESTINO, @T_TRANSCURRIDO_H, @NOM_PASAJERO, @ID_VEHICULO, @ID_EMP, CURRENT_TIMESTAMP
+
+
+-- procedimiento almacenado para insertar un viaje de un empleado
+CREATE PROCEDURE PgetViajesEmpleado
+@idEmp int
+AS
+	SELECT 
+		[ORIGEN],[DESTINO],[T_TRANSCURRIDO_H],[NOM_PASAJERO],[ID_VEHICULO],[ID_EMP],[HORA_VIAJE]
+	FROM
+		[dbo].[VIAJES]
+	WHERE
+		[ID_VIAJE] = @idEmp
+GO
+
+EXECUTE PgetViajesEmpleado 2
+
+
+
+
+
+
+
+
+	
+
+
+
+

@@ -1,0 +1,75 @@
+﻿@model MvcEmpleados.VIAJES
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>VIAJES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ORIGEN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ORIGEN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DESTINO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DESTINO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.T_TRANSCURRIDO_H)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.T_TRANSCURRIDO_H)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NOM_PASAJERO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NOM_PASAJERO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HORA_VIAJE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HORA_VIAJE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EMPLEADOS.NOMBRE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EMPLEADOS.NOMBRE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VEHICULOS.PLACA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VEHICULOS.PLACA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_VIAJE }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
